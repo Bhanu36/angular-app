@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProjectComponent } from './project/project.component';
-import { apiservice } from './service/apiCall-service'
+import { Apiservice } from './service/apiCall-service'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // <== add the imports!
 
 @NgModule({
@@ -19,7 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // <== add th
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [apiservice],
+  providers: [Apiservice],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

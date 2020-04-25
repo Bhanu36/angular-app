@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm, EmailValidator } from '@angular/forms';
-import { apiservice } from '../service/apiCall-service'
+import { Apiservice } from '../service/apiCall-service'
 
 
 @Component({
