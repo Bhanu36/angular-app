@@ -1,0 +1,48 @@
+.name {
+    width: 150px;
+}
+.price {
+    width: 100px;
+}
+.quantity {
+    width: 120px;
+}
+.rating {
+    width: 80px;
+}
+.offer {
+    width: 80px;
+}
+.buy {
+    width: 100px;
+}
+.category {
+    width: 100px;
+ }
+ 
+ .dropdown-toggle-custom {
+     background-color: #fff;
+     border: 1px solid #eee;
+     width: 100px;
+     box-shadow: none;
+ }
+
+ .dropdown-toggle::after {
+     right: 4px;
+     position: absolute;
+     top: 2px;
+}
+
+.dropdown-selectmenu {
+    width: 100px;
+}
+
+.select-box {
+    list-style-type: none;
+    padding-left: 4px;
+    padding-bottom: 4px;
+}
+
+.select-box li {
+    cursor: pointer;
+}
