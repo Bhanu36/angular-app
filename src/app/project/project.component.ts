@@ -19,7 +19,7 @@ export class ProjectComponent implements OnInit {
   category = [];
   availableOffers = [];
 
-  constructor(private httpService: apiservice) { }
+  constructor(private httpService: Apiservice) { }
   ngOnInit() {  
     this.httpService.getRestaurantData().subscribe(data => {
       this.menu = data.menu.items
