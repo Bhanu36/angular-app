@@ -69,6 +69,7 @@ export class ProjectComponent implements OnInit {
         })
       })
       this.showListing()
+      this.isEdit = false;
     } else {
       const body = {
         userName: name,
