@@ -46,3 +46,14 @@
 .select-box li {
     cursor: pointer;
 }
+.button {
+    border-radius: 12px;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 116px;
+    cursor: pointer;
+  }

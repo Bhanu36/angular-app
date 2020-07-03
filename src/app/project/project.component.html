@@ -1,61 +1,80 @@
 <section class="container">
-
-	<h2>Restaurant Info</h2>
-
+	<p>GUVI</p>
 	<div class="row">
 		<div class="col-6">
-			<div class="form-group">
-
-				<input type="search" name="searchText" [(ngModel)]="searchKey" id="search" #search="ngModel"
-				class="light-table-filter form-control col-8" data-table="order-table" placeholder="Please Enter Dish name" />
-				<button type="submit" class="btn btn-primary col-4" (click)="searchWithDishName()">Submit</button>
+			<button type="submit" class="btn btn-primary col-4" (click)='showInputBox()'>+ create</button>
+			<div *ngIf="!!btn1" class="button">
+				<button type="submit" class="btn btn-primary" (click)='showListing()'>Close</button>
 			</div>
-		</div>
-		<div class="col-6">
-			<div class="form-group">
-				<div class="btn-group btn-block">
-					<button type="button" class="btn text-left roleselector dropdown-toggle dropdown-toggle-custom" data-toggle="dropdown">
-						Choose a Dish:
-					</button>
-					<ul role="menu" class="dropdown-menu dropdown-selectmenu">
-						<li>
-							<ul class="select-box">
-								<li *ngFor="let key of category" (click)="selectCategory(key)">{{key}}</li>
-							</ul>
-						</li>
-					</ul>
-				</div>
+			<div  *ngIf="!!btn1" class="form-group">
+				<form #myForm="ngForm" (ngSubmit)="onSubmit(username,phone,email,batch)">
+					<div class="form-group row">
+					  <label for="inputEmail3" class="col-sm-2 col-form-label">Name</label>
+					  <div class="col-sm-10">
+						<input type="text" class="form-control" [(ngModel)]="username" name="username" id="inputEmail3" placeholder="Name">
+					  </div>
+					</div>
+					<div class="form-group row">
+					  <label for="inputPassword3" class="col-sm-2 col-form-label">Phone</label>
+					  <div class="col-sm-10">
+						<input type="text" class="form-control" [(ngModel)]="phone" name="phone" id="inputPassword3" placeholder="Phone">
+					  </div>
+					</div>
+					<div class="form-group row">
+						<label for="inputEmail4" class="col-sm-2 col-form-label">Email</label>
+						<div class="col-sm-10">
+						  <input type="email"  [(ngModel)]="email" name="email" class="form-control" id="inputEmail4" placeholder="Name">
+						</div>
+					  </div>
+					<fieldset class="form-group">
+					  <div class="row">
+						<legend class="col-form-label col-sm-2 pt-0">Batch</legend>
+						<div class="form-check">
+							<label class="form-check-label">
+							  <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1"  [checked]="isWeekEnd" [value]="true" [(ngModel)]="isWeekEnd">
+							 weekEnd
+							</label>
+						  </div>
+						  <div class="form-check">
+						  <label class="form-check-label">
+							  <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2"  [checked]="!isWeekEnd" [value]="false" [(ngModel)]="isWeekEnd">
+							 weekDay
+							</label>
+						  </div>
+						</div>
+					</fieldset>
+					<div class="form-group row">
+					  <div class="col-sm-10">
+						<button type="submit" class="btn btn-primary">Submit</button>
+					  </div>
+					</div>
+				  </form>
 			</div>
-
 		</div>
 	</div>
+	<div *ngIf="!btn1">
 	<table class="order-table table">
 		<thead>
 			<tr>
 				<th class="name">Name</th>
-				<th class="price">Price</th>
-				<th class="quantity">Quantity</th>
-				<th class="rating">Rating</th>
-				<th class="offer">Offer</th>
-				<th class="category">Category</th>
+				<th class="price">Phone</th>
+				<th class="quantity">Email</th>
+				<th class="rating">Batch</th>
+				<th class="offer"> </th>
+				<th class="category"> </th>
 				<th class="buy"></th>
 			</tr>
 		</thead>
 		<tbody *ngIf="menu.length > 0">
 				<tr *ngFor="let key of menu">
-					<td class="name">{{key.name}}</td>
-					<td class="price">&#x20b9;{{key.price}}</td>
-					<td class="quantity">{{key.qty}}</td>
-					<td class="rating">{{key.rating}}</td>
-					<td class="offer">{{key.Offer}}%</td>
-					<td class="category">{{category[key.category]}}</td>
-					<td class="buy">
-						<button class="btn btn-primary">
-							BUY
-						</button>
-					</td>
+					<td class="name">{{key.userName}}</td> 
+					<td class="price">{{key.phone}}</td>
+					<td class="quantity">{{key.email}}</td>
+					<td class="rating">{{(key.isWeekEnd == true)?"weekEnd":"weekDay"}}</td>
+					<td class="offer"><button class="btn btn-primary col-10" (click)='edit(key._id,key.userName,key.phone,key.email,key.batch)'>Edit</button></td>
+					<td class="category"><button class="btn btn-primary col-10" (click)='delete(key._id)'>Delete</button></td>
 				</tr>
 		</tbody>
 	</table>
-
+	</div>
 </section>

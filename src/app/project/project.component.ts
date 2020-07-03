@@ -11,57 +11,87 @@ import { Apiservice } from '../service/apiCall-service'
 
 
 export class ProjectComponent implements OnInit {
-  menu = [];
+
   public searchKey: any;
-  ratingFilter = '';
-  price = '';
-  selectedCategory = '';
-  category = [];
-  availableOffers = [];
-
+  public name: any;
+  public username: string;
+  public phone: number;
+  public email: string;
+  public id: any;
+  btn1 = false;
+  isEdit = false;
+  isWeekEnd = false;
+  menu = [];
   constructor(private httpService: Apiservice) { }
-  ngOnInit() {  
-    this.httpService.getRestaurantData().subscribe(data => {
-      this.menu = data.menu.items
-      this.category = data.menu.categories
+  ngOnInit() {
+    console.log(this.btn1)
+    this.httpService.get('/stu/list').subscribe(data => {
+      console.log("data", data.data)
+      this.menu = data.data
     })
   }
 
-  searchWithDishName() {
-    if(!this.searchKey){
-      this.httpService.getRestaurantData().subscribe(data => {
-        this.menu = data.menu.items
-        this.category = data.menu.categories
-      })
-    }
-    const searchText = this.searchKey.toLowerCase()
-    const filteredData = this.menu.filter((dishInfo) => {
-      return dishInfo.name.includes(searchText)
-    })
-    this.menu = filteredData
+  showInputBox() {
+    this.btn1 = true;
   }
 
-  SearchWithFilters() {
-    const rating = parseInt(this.ratingFilter)
-    const price = this.price
-    const selectdCategory = this.selectedCategory
-    if (rating) {
-      const ratingData = this.menu.filter((data) => {
-        if (data.rating === rating) {
-          return data;
-        }
+  showListing() {
+    this.btn1 = false;
+    this.username = null;
+    this.phone = null;
+    this.email = null;
+    this.isWeekEnd = false;
+  }
+
+  edit(id, name, phone, email, isWeekEnd) {
+    this.btn1 = true;
+    this.username = name;
+    this.phone = phone;
+    this.email = email;
+    this.id = id;
+    this.isWeekEnd = (isWeekEnd == "weekEnd") ? true : false;
+    this.isEdit = true;
+  }
+
+  onSubmit(name, phone, email, isWeekEnd) {
+    if (this.isEdit) {
+      const body = {
+        _id: this.id,
+        userName: this.username,
+        phone: this.phone,
+        email: this.email,
+        isWeekEnd: this.isWeekEnd
+      }
+      this.httpService.put('/stu/studentInfo', "", body).subscribe(data => {
+        this.btn1 = false;
+        this.httpService.get('/stu/list').subscribe(data => {
+          this.menu = data.data;
+        })
       })
-      this.menu = ratingData;
+      this.showListing()
+    } else {
+      const body = {
+        userName: name,
+        phone: phone,
+        email: email,
+        isWeekEnd: (isWeekEnd === 'weekEnd') ? true : false
+      }
+      this.httpService.post('/stu/create', "", body).subscribe(data => {
+        this.btn1 = false;
+        this.httpService.get('/stu/list').subscribe(data => {
+          this.menu = data.data
+        })
+      })
     }
   }
+
+  delete(id) {
+    this.httpService.delete(`/stu/delete/${id}`, false, id).subscribe(data => {
+      this.menu = data.data
+    })
+  }
+
 }
-
-
-
-
-
-
-
 
 
 
