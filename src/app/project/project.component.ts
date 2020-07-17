@@ -21,7 +21,7 @@ export class ProjectComponent implements OnInit {
 
   constructor(private httpService: Apiservice) { }
   ngOnInit() {  
-    this.httpService.getRestaurantData().subscribe(data => {
+    this.httpService.get("login").subscribe(data => {
       this.menu = data.menu.items
       this.category = data.menu.categories
     })
@@ -29,7 +29,7 @@ export class ProjectComponent implements OnInit {
 
   searchWithDishName() {
     if(!this.searchKey){
-      this.httpService.getRestaurantData().subscribe(data => {
+      this.httpService.get("login").subscribe(data => {
         this.menu = data.menu.items
         this.category = data.menu.categories
       })

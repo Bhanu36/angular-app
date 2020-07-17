@@ -2,14 +2,18 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
+
+const serverUrl = "http://localhost:4300/"
 @Injectable()
 
 export class Apiservice {
 
     constructor(private http: HttpClient) { }
 
-    getRestaurantData(): Observable<any> {
-        return this.http.get("https://5b25e407-0934-49b1-8927-363ed2d2c6f4.mock.pstmn.io/listMenuData")
+    get(apiName: String, isAuth?: any, params?: any): Observable<any> {
+        const apiUrl = serverUrl + apiName
+        console.log(apiUrl)
+        return this.http.get(apiUrl)
     }
 
 

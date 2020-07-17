@@ -5,12 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProjectComponent } from './project/project.component';
 import { Apiservice } from './service/apiCall-service'
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // <== add the imports!
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component'; // <== add the imports!
 
 @NgModule({
   declarations: [
     AppComponent,
     ProjectComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
